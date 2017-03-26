@@ -9,19 +9,19 @@
 
   /*global define: false, module: false, require: false */
 
-  if ( typeof define == 'function' && define.amd ) {
+  if ( typeof module == 'object' && module.exports ) {
+    // CommonJS
+    module.exports = factory(
+      window,
+      require('ev-emitter')
+    );
+  } else if ( typeof define == 'function' && define.amd ) {
     // AMD
     define( [
       'ev-emitter/ev-emitter'
     ], function( EvEmitter ) {
       return factory( window, EvEmitter );
     });
-  } else if ( typeof module == 'object' && module.exports ) {
-    // CommonJS
-    module.exports = factory(
-      window,
-      require('ev-emitter')
-    );
   } else {
     // browser global
     window.imagesLoaded = factory(
